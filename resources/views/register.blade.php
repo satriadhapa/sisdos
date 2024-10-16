@@ -1,48 +1,158 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel 10 Custom Login and Registration - Register Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <title>SiGENDO - Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image: url({{ URL('storage/background.png') }});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 1200px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.85);
+            overflow: hidden;
+        }
+
+        .register-content {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .form-section {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .img-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-section img {
+            width: 100%;
+            max-width: 500;
+            height: auto;
+        }
+
+        h2 {
+            padding: 15px;
+            font-family: 'Times New Roman', sans-serif;
+            font-style: inherit;
+            font-weight:normal;
+            text-align: left;
+        }
+        h2.card-title {
+            background-color: #A80063; /* Tambah warna latar belakang */
+            color: white; /* Warna teks */
+            padding: 5px; /* Padding untuk ruang di dalam elemen */
+            border-radius: 30px; /* Agar sudut lebih melengkung */
+            text-align: center; /* Tengah-kan teks */
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group-text {
+            background-color: #f8f9fa;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            margin: 0 10px;
+        }
+
+        .btn-custom-register {
+            background-color: #A80063;
+            color: white;
+            border-radius: 30px;
+        }
+
+        .btn-custom-register:hover {
+            background-color: #000000;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
-<div class="row justify-content-center mt-5">
-        <div class="col-lg-4">
+    <div class="register-container">
+        <div class="col-lg-8">
             <div class="card">
-                <div class="card-header">
-                    <h1 class="card-title">Register</h1>
-                </div>
-                <div class="card-body">
-                    @if(Session::has('success'))
+                <h2>SiGENDO</h2>
+                <div class="register-content">
+                    <div class="img-section">
+                        <img src="{{ URL('storage/nusaputra.png') }}" alt="Register Image">
+                    </div>
+                    <div class="form-section">
+                        <h1 class="card-title text-center">Selamat Datang di SiGENDO (Sistem Genetika Jadwal Dosen)</h1>
+                        <h2 class="card-title text-center ">Buat Akun Baru</h2>
+                        @if(Session::has('success'))
                         <div class="alert alert-success" role="alert">
                             {{ Session::get('success') }}
                         </div>
-                    @endif
-                    <form action="{{ route('register') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="John Doe" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <div class="d-grid">
-                                <button class="btn btn-primary">Register</button>
+                        @endif
+                        <form action="{{ route('register') }}" method="POST">
+                            @csrf
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required>
                             </div>
-                        </div>
-                    </form>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" name="email" class="form-control" placeholder="nama@gmail.com"
+                                    required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="Kata Sandi"
+                                    required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" name="password_confirmation" class="form-control"
+                                    placeholder="Konfirmasi Kata Sandi" required>
+                            </div>
+                            <div class="button-group">
+                                <button type="submit" class="btn btn-custom-register">Buat Akun</button>
+                            </div>
+                            <p class="mt-3 text-center">Sudah punya akun? <a href="{{ route('login') }}">Login</a></p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
